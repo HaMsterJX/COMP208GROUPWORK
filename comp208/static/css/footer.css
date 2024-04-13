@@ -3,10 +3,10 @@
     height: 10vh;
     background-color: #343437;
     display: flex;
-    position: fixed; /* 修改这里 */
-    bottom: 0; /* 添加这里 */
-    left: 0; /* 确保footer横跨整个屏幕宽度 */
-    width: 100%; /* 确保footer横跨整个屏幕宽度 */
+    position: fixed; /*  Modify here */
+    bottom: 0; /* Add here */
+    left: 0; /* Make sure the footer spans the entire width of the screen */
+    width: 100%; /* Make sure the footer spans the entire width of the screen */
 	
 }
 .footer .ft_main {

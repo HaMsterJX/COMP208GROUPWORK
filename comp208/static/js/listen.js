@@ -1,10 +1,10 @@
-// 播放对象
+// playback target
 let audio = document.querySelector('#ado')
-// 播放按钮
+// play button
 const _audio = document.querySelector('._audio')
 const _voice = document.querySelector('._voice')
 
-// 音频设置
+// Audio Settings
 audio.src = "./media/小さな恋のうた.mp3"
 audio.controls = false
 audio.loop = true
@@ -20,7 +20,7 @@ audio.volume = 0.3
 
 
 
-// 播放开始与暂停以及相关的图标字体修改
+// Playback start and pause and related icon font changes
 function bofang() {
     if (audio.paused) {
         audio.play()
@@ -33,7 +33,7 @@ function bofang() {
     }
 }
 
-// 是否静音与相关的图标字体修改
+// Mute or not mute and related icon font modification
 _voice.addEventListener('click', () => {
     if (audio.muted) {
         audio.muted = false
@@ -46,12 +46,12 @@ _voice.addEventListener('click', () => {
     }
 })
 
-// 一上来先调一次初始化函数
+// The initialisation function is called once.
 changeSong()
 
-// 将audio的初始化函数封装
+// Wrapping the audio initialisation function
 function changeSong() {
-    // 获取音频时长
+    // Get Audio Duration
     if (audio != null) {
         audio.load()
         audio.oncanplay = function () {
@@ -60,7 +60,7 @@ function changeSong() {
         }
     }
 
-    // 格式化时间格式
+    // Formatting Time Format
     function transTime(time) {
         let duration = parseInt(time)
         let minute = parseInt(duration / 60)
@@ -77,7 +77,7 @@ function changeSong() {
         return minute + isM0 + sec
     }
 
-    // 时长进度条
+    // hourly rate bar
     const progress = document.querySelector(".progress");
     const slide = document.querySelector(".slide");
     const fill = document.querySelector(".fill")
@@ -94,7 +94,7 @@ function changeSong() {
         duraTime.innerHTML = transTime(audio.duration);
     };
 
-    // 进度条拖动
+    // Progress bar drag
     slide.onmousedown = function (e) {
         let x = e.clientX - this.offsetLeft
         document.onmousemove = function (e) {
@@ -125,7 +125,7 @@ function changeSong() {
     }
 }
 
-// right_box > .navigation 修改right_box 导航栏部分样式1
+// right_box > .navigation Modify the style of right_box navigation bar section1
 
 const items = document.querySelectorAll('.navigation li')
 function setActive() {
@@ -140,12 +140,12 @@ items.forEach((items) => {
     items.addEventListener('click', setActive)
 })
 
-// 获取推荐歌曲  切歌功能
+// Get recommended songs   Song cut function
 const image = document.querySelector('._img')
 const recm_list = document.querySelectorAll('.recm_list ul li')
 const audio_list = ['夜驱', 'Call your name', 'rain', 'アムリタ', '群青','oddtaxi','小さな恋のうた']
 const image_list = ['夜驱', 'callYourName', 'rain', '翼年代', '群青','oddtaxi','小さな恋のうた']
-// ftleft 切哥后对应的图片歌名和歌手名称也需要切换
+// ftleft After cutting the song, the corresponding picture song title and artist name need to be switched.
 const songName = document.querySelector('.songName')
 const singer = document.querySelector('.singer')
 const songAndSinger_list = [
@@ -174,21 +174,21 @@ let currentIndex = audio_list.indexOf('小さな恋のうた');
 
 
 function playPrev() {
-    // 计算上一首歌曲的索引
+    // Calculate the index of the previous song
     currentIndex = (currentIndex - 1 + audio_list.length) % audio_list.length;
-    // 更新并播放选中的歌曲
+    // Update and play the selected song
     updateAndPlayCurrentSong();
 }
 
 function playNext() {
-    // 计算下一首歌曲的索引
+    // Calculate the index of the next song
     currentIndex = (currentIndex + 1) % audio_list.length;
-    // 更新并播放选中的歌曲
+    // Update and play the selected song
     updateAndPlayCurrentSong();
 }
 
 function updateAndPlayCurrentSong() {
-    // 根据当前索引更新音频源、图片和歌曲信息
+    // Updates audio source, picture and song information based on the current index
     audio.src = "./audio/" + audio_list[currentIndex] + ".mp3"
     image.src = "./image/main/" + image_list[currentIndex] + ".jpg"
     songName.innerHTML = songAndSinger_list[currentIndex][0] + '<i class="iconfont icon-aixin"></i>'

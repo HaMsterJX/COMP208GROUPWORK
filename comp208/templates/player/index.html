@@ -14,37 +14,37 @@
 </head>
 
 <body>
-<!-- 播放器 -->
+<!-- player -->
 <div class="music-player">
-    <!-- audio标签 -->
+    <!-- audio tag -->
     <audio class="music-player__audio" src="{% static 'media/知足.m4a' %}"></audio>
     {% csrf_token %}
-    <!-- 播放器主体 -->
+    <!-- Player Body -->
     <div class="music-player__main">
-        <!-- 模糊背景 -->
+        <!-- Blurred background -->
        <div class="music-player__blur" style="background-image: url({% static 'images/1.jpg' %});"></div>
-        <!-- 功能列表 -->
+        <!-- Function List -->
         <div class="music-find_list layui-btn-container">
             <span id="btn_list" class="layui-icon layui-icon-app demo1"></span>
         </div>
-        <!-- 功能列表 -->
-        <!-- 唱片 -->
+        <!-- Function List -->
+        <!-- gramophone record -->
         <div class="music-player__disc">
-            <!-- 唱片图片 -->
+            <!-- gramophone record image -->
             <div class="music-player__image">
                 <img src="{% static 'images/c.jpg' %}" alt="" width="100%">
             </div>
-            <!-- 指针 -->
+            <!--  pointers -->
             <div class="music-player__pointer"><img src="{% static 'images/cd_tou.png' %}" alt="" width="100%"></div>
         </div>
-        <!-- 控件主体 -->
+        <!-- Control Body -->
         <div class="music-player__controls">
-            <!-- 歌曲信息 -->
+            <!-- Song Information -->
             <div class="music__info">
                 <h3 class="music__info--title">知足</h3>
                 <p class="music__info--singer">五月天</p>
             </div>
-            <!-- 控件... -->
+            <!-- control (e.g. button, text box etc)... -->
             <div class="player-control">
                 <div class="player-control__content">
                     <div class="player-control__btns">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-                <!-- 歌曲播放进度 -->
+                <!-- Song Playback Progress -->
                 <div class="player-control__content">
                     <div class="player__song--progress progress">
                         <div class="back" style="width: 22.5px;"></div>
@@ -81,7 +81,7 @@
 
         </div>
     </div>
-    <!-- 歌曲列表 -->
+    <!-- Song List -->
     <div class="music-player__list">
         <ul class="music__list_content">
             <li class="music__list__item play">知足 - 五月天</li>
@@ -103,7 +103,7 @@ layui.use(['dropdown', 'util', 'layer', 'table'], function(){
       ,layer = layui.layer
       ,$ = layui.jquery;
 
-      //初演示
+      //first demonstration
       dropdown.render({
         elem: '.demo1'
         ,data: [{
@@ -115,7 +115,7 @@ layui.use(['dropdown', 'util', 'layer', 'table'], function(){
       }
     });
 
-    // 请求接口 导入歌曲到数据库
+    // Request Interface Import Songs to Database
     function loadMusic() {
         $.ajax({
                 type: 'GET',

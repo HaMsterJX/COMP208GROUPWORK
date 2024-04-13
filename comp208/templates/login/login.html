@@ -8,7 +8,7 @@
                 color: #FFFFFF;
             }
             
-            /* 其他样式 */
+            /* Other styles */
         </style>
 		
 		
@@ -85,7 +85,7 @@
             </div>
 
             <div class="ft_main">
-                <!-- 播放栏工具 -->
+                <!-- Playbar Tools -->
                 <ul class="tool_list">
                     <li><i class="iconfont icon-lajitong"></i></li>
                     
@@ -94,11 +94,11 @@
                     <li onclick="playNext()"><i class="iconfont icon-xiayigexiayishou"></i></li>
                     <li><i class="iconfont icon-geciweidianji"></i></li>
                 </ul>
-                <!-- 进度条 -->
+                <!-- progress bar -->
                 <div class="progress">                   
                     <div class="slide"></div>
                     <div class="fill"> </div>                  
-                    <!--歌曲当前时间与总时间  -->
+                    <!-- Song current time and total time  -->
                     <span class="currentTime time">00:00</span>
                     <span class="duraTime time">00:00</span>
                </div>
@@ -123,29 +123,29 @@ document.addEventListener('DOMContentLoaded', function() {
     var displayBtn = document.querySelector('.display-btn');
     var displayBtn2 = document.querySelector('.display-btn2');
 
-    // 点击登录按钮显示登录表单
+    // Click on the Login button to display the login form
     displayBtn.addEventListener('click', function() {
         container.style.display = 'block';
-        container2.style.display = 'none'; // 确保注册表单被隐藏
-        displayCheckbox.checked = true; // 可选，如果你使用checkbox来控制
+        container2.style.display = 'none'; // Make sure the registration form is hidden
+        displayCheckbox.checked = true; // Optional, if you use a checkbox to control the
     });
 
-    // 点击注册按钮显示注册表单
+    // Click the Register button to display the registration form
     displayBtn2.addEventListener('click', function() {
         container2.style.display = 'block';
-        container.style.display = 'none'; // 确保登录表单被隐藏
-        display2Checkbox.checked = true; // 可选，如果你使用checkbox来控制
+        container.style.display = 'none'; // Make sure the login form is hidden
+        display2Checkbox.checked = true; // Optional, if you use a checkbox to control the
     });
 
-    // 关闭按钮逻辑（假设你也想通过点击关闭按钮隐藏表单）
+    // Close button logic (assuming you also want to hide the form by clicking the close button)
     document.querySelector('.close-btn').addEventListener('click', function() {
         container.style.display = 'none';
-        displayCheckbox.checked = false; // 可选，如果你使用checkbox来控制
+        displayCheckbox.checked = false; // Optional, if you use a checkbox to control the
     });
 
     document.querySelector('.close-btn2').addEventListener('click', function() {
         container2.style.display = 'none';
-        display2Checkbox.checked = false; // 可选，如果你使用checkbox来控制
+        display2Checkbox.checked = false; // Optional, if you use a checkbox to control the
     });
 });
 </script>

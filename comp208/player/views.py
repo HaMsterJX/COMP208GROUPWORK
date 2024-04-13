@@ -7,14 +7,14 @@ import random
 
 
 def index(request):
-    """ 展示音乐播放器 """
+    """ Demonstrate the music player """
 
     return render(request, 'player/index.html')
 
 
 @require_http_methods(['POST'])
 def media_list(request):
-    """ MP3音乐列表 """
+    """ MP3 Music Lists """
 
     mediaList = Player.objects.all()
 
@@ -32,30 +32,30 @@ def media_list(request):
 
 
 def load_music(request):
-    """ 加载本地的歌曲 """
+    """ Loading Local Songs """
 
-    # 项目路径
+    #  Project Paths
     app_path = os.path.abspath(os.path.dirname(__file__))
-    # 获取媒体资源目录下所有歌曲文件
+    # Get all song files in the Media Resources directory
     path = app_path + '/../static/media/'
     files = os.listdir(path)
 
     for file in files:
         print(insert_music(file))
 
-    return HttpResponse('加载本地音乐成功！')
+    return HttpResponse(' Loading Local Music Successfully！')
 
 
 def insert_music(name):
-    """ 把歌曲信息插入数据表 """
+    """ Insert song information into the data table """
 
-    # 查询歌曲是否存在
+    #  Check if the song exists
     info = Player.objects.filter(title=name).first()
     if info:
         return True
 
     ext = 'mp3'
-    # 判断文件后缀
+    #  Determine file suffix
     fileInfo = name.split('.')
     if len(fileInfo) != 2:
         return False
@@ -70,7 +70,7 @@ def insert_music(name):
     single.singer = single_1.strip('.mp3')
     single.songUrl = '/static/media/' + name
 
-    # 随机1-10专辑封面图片
+    # Random 1-10 album cover images
     sui_num = random.randint(1, 10)
     single.imageUrl = '/static/images/' + str(sui_num) + '.png'
     return single.save()

@@ -14,24 +14,24 @@
 
 
 .logo {
-    display: flex; /* 使用flex布局 */
-    justify-content: center; /* 水平居中 */
-    align-items: center; /* 垂直居中 */
-    width: 300px; /* 定义固定宽度 */
-    height: 100px; /* 定义固定高度 */
-    margin: auto; /* 自动边距以在容器中居中 */
+    display: flex; /* Using flex layout */
+    justify-content: center; /* horizontal centering */
+    align-items: center; /* vertical centering */
+    width: 300px; /* Define fixed width */
+    height: 100px; /* Define Fixed Height */
+    margin: auto; /* Auto margins to centre in the container */
 	border-radius: 25px;
 }
 
 .logo img {
-    width: 50px; /* 定义图像的固定宽度 */
-    height: 50px; /* 定义图像的固定高度 */
-    margin-right: 10px; /* 在图像和文本之间添加一些空间 */
+    width: 50px; /* Define the fixed width of the image */
+    height: 50px; /* Define the fixed height of the image */
+    margin-right: 10px; /* Add some space between the image and the text */
 }
 
 .logo span {
-    font-size: 20px; /* 定义文本大小 */
-    /* 可以添加更多样式来调整文本的外观 */
+    font-size: 20px; /* Define text size */
+    /* More styles can be added to adjust the appearance of the text */
 }
 
 
@@ -251,10 +251,10 @@ form a:hover {
     height: 10vh;
     background-color: #343437;
     display: flex;
-    position: fixed; /* 修改这里 */
-    bottom: 0; /* 添加这里 */
-    left: 0; /* 确保footer横跨整个屏幕宽度 */
-    width: 100%; /* 确保footer横跨整个屏幕宽度 */
+    position: fixed; /* Modify here */
+    bottom: 0; /* Add here */
+    left: 0; /* Make sure the footer spans the entire width of the screen */
+    width: 100%; /* Make sure the footer spans the entire width of the screen */
 	
 }
 

@@ -1,4 +1,4 @@
-// 创建一个音乐播放器的类 单例模式
+// Creating a Music Player  Class Singleton Pattern
 class Player {
     constructor() {
         if (Player.instance) {
@@ -8,21 +8,21 @@ class Player {
         return this.getInstance(...arguments);
     }
 
-    // 构建实例
+    // Build Examples
     getInstance() {
         let instance = new PlayerCreator(...arguments);
-        // 把构建好的实例挂在Player类上
+        // Hook up the constructed instance to the Player class
         Player.instance = instance;
         return instance;
     }
 }
 
-// 歌曲信息
+// Song Information
 class Musics {
 
-    // 构造函数
+    // constructor
     constructor() {
-		// 下方歌曲列表容器
+		// Bottom Song List Container
 	   this.song_index = 0;
 	   this.loop_mode = 0;
 	   this.audio = document.querySelector('.music-player__audio');
@@ -36,7 +36,7 @@ class Musics {
         this.getSongs()
     }
 
-    // 获取歌曲列表
+    // Get song list
     getSongs() {
         let mp3list = []
 
@@ -48,9 +48,9 @@ class Musics {
                 data: {id:1, csrfmiddlewaretoken:csrf},
                 dataType: 'json',
                 success: function (data) {
-					// 将mp3list赋值给this.songs
+					// Assign mp3list to this.songs
 					this.songs = data.list;
-					// 调用渲染歌曲列表的方法
+					// Call the method that renders the song list
 					this.renderSongList();
                 }.bind(this),
                 error: function (e) {
@@ -58,7 +58,7 @@ class Musics {
                }
         });
     }
-	// 生成播放列表
+	// Generating Playlists
     renderSongList() {
         let _str = '';
         this.songs.forEach((song, i) => {
@@ -67,7 +67,7 @@ class Musics {
         this.song_list.html(_str);
     }
 
-	// 根据歌曲去渲染视图
+	// Render the view according to the song
     renderSongStyle() {
         let {
             title,
@@ -81,29 +81,29 @@ class Musics {
         this.render_doms.image.prop('src', imageUrl);
         this.render_doms.blur.css('background-image', 'url("' + imageUrl + '")');
 
-        // 切换列表中的item的类名 play
+        // Class name of the item in the toggle list play
         this.song_list.find('.music__list__item').eq(this.song_index).addClass('play').siblings().removeClass('play');
     }
-    // 根据索引获取歌曲的方法
+    // Methods to get songs by index
     getSongByNum(index) {
         return this.songs[index];
     }
 
-	// 更改歌曲索引
+	// Changing the song index
     changeSongIndex(type) {
         if (typeof type === 'number') {
             this.song_index = type;
         } else {
             if (this.loop_mode === 0) {
-                // 列表循环
+                // list cycle
                 this.song_index += type === 'next' ? 1 : -1;
                 if (this.song_index > this.songs.length - 1) this.song_index = 0;
                 if (this.song_index < 0) this.song_index = this.songs.length - 1;
             } else if (this.loop_mode === 1) {
-                // 随机播放
+                // random playback
                 let _length = this.songs.length;
                 let _random = Math.floor(Math.random() * _length);
-                for (let i = 0; i < 10000; i++) { // 随机的数为本身则继续随机
+                for (let i = 0; i < 10000; i++) { // If the random number is itself, then continue to randomise
                     if (this.song_index == _random) {
                         _random = Math.floor(Math.random() * _length);
                     } else {
@@ -117,37 +117,37 @@ class Musics {
         }
     }
 
-	// 切换歌曲
+	// Switching Songs
     changeSong(type) {
-        // 更改索引
+        // Change Index
         this.changeSongIndex(type);
-        // 记录切歌前的状态
+        // Record the state before cutting the song
         let _is_pause = this.audio.paused;
-        // 切歌后更改视图显示
+        // Changing the view display after a song cut
         this.renderSongStyle();
-        // 如果切歌前是在播放，就继续播放
+        // If it was playing before the song was cut, keep it playing
         if (!_is_pause) this.audio.play();
     }
 }
 
-//真正的构建播放器的类
+//The class that actually builds the player
 class PlayerCreator {
     constructor() {
-        // Audio dom元素, 因为很多api都是需要原生audio调用的，所以不用jq获取
+        // Audio dom element, because many api's require native audio calls, so don't use jq to get
         this.audio = document.querySelector('.music-player__audio');
-        // this.audio.muted = true; // 控制静音
+        // this.audio.muted = true; // Control Mute
         this.audio.volume = 0.5;
 
-        //工具
+        //artifact
         this.util = new Util();
-		this.musics = new Musics(); //歌曲信息
+		this.musics = new Musics(); //Song Information
 
-        this.song_index = 0; // 当前播放的歌曲索引
+        this.song_index = 0; // Index of currently playing songs
         this.loop_mode = 0; // 1 2
-        // 下方歌曲列表容器
+        // Bottom Song List Container
         this.song_list = $('.music__list_content');
 
-        // 切换歌曲时需要渲染的dom组
+        // The dom group to be rendered when switching songs
         this.render_doms = {
             title: $('.music__info--title'),
             singer: $('.music__info--singer'),
@@ -155,75 +155,75 @@ class PlayerCreator {
             blur: $('.music-player__blur')
         };
 
-        // 禁音时需要渲染的dom组
+        // The dom group to be rendered when the sound is disabled
         this.ban_dom = {
             control__btn: $('.control__volume--icon')
         };
 
-        // 时间显示容器
+        // Time display container
         this.render_time = {
             now: $('.nowTime'),
             total: $('.totalTime')
         };
 
-        // 唱片
+        // gramophone record
         this.disc = {
             image: $('.music-player__image'),
             pointer: $('.music-player__pointer')
         };
-        // 播放器初始化
+        // Player initialisation
         this.init();
     }
-    // 初始化函数
+    // Initialisation functions
     init() {
         this.bindEventListener();
     }
 
-    // 绑定各种事件
+    // Binding various events
     bindEventListener() {
-        // 播放按钮
+        // play button
         this.$play = new Btns('.player-control__btn--play', {
             click: this.handlePlayAndPause.bind(this)
         });
-        // 上一首
+        // previous song
         this.$prev = new Btns('.player-control__btn--prev', {
 			click: () => this.musics.changeSong('prev')
         });
-        // 下一首
+        // next song
         this.$next = new Btns('.player-control__btn--next', {
 			click: () => this.musics.changeSong('next')
         });
-        // 循环模式
+        // recurrent mode
         this.$mode = new Btns('.player-control__btn--mode', {
             click: this.changePlayMode.bind(this)
         });
-        // 禁音
+        // prohibitory note
         this.$ban = new Btns('.control__volume--icon', {
             click: this.banNotes.bind(this)
         });
-        // 列表点击
+        // list click
         this.song_list.on('click', 'li', (e) => {
             let index = $(e.target).index();
             this.musics.changeSong(index);
         });
 
-        // 音量控制 audio标签音量 vlouem 属性控制0-1
+        // Volume control audio tab volume vlouem property control 0-1
         new Progress('.control__volume--progress', {
             min: 0,
             max: 1,
             value: this.audio.volume,
-            handler: (value) => { //更改进度时
+            handler: (value) => { //When changing progress
                 this.audio.volume = value;
             }
         });
 
 
-        // 歌曲进度 this.audio.duration
-        // 可以播放的时候触发（歌曲的基本信息都已经获取到了）
+        // Song Progress this.audio.duration
+        // Can be triggered when playing (basic information about the song is already obtained)
         this.audio.oncanplay = () => {
-            //避免重复实例化
+            // Avoiding Repeated Instantiation
             if (this.progress) {
-                this.progress.max = this.audio.duration; //切换歌曲后更新时长
+                this.progress.max = this.audio.duration; //Update duration after switching songs
                 this.render_time.total.html(this.util.formatTime(this.audio.duration));
                 return false;
             }
@@ -235,31 +235,31 @@ class PlayerCreator {
                     this.audio.currentTime = value;
                 }
             });
-            // 调整总时长
+            // Adjustment of total duration
             this.render_time.total.html(this.util.formatTime(this.audio.duration));
         };
 
-        // 会在播放的时候持续触发
+        // It will be triggered continuously during playback
         this.audio.ontimeupdate = () => {
             this.progress.setValue(this.audio.currentTime);
-            // 调整当前时长
+            // Adjusting the current duration
             this.render_time.now.html(this.util.formatTime(this.audio.currentTime));
         };
 
-        //当歌曲播放完成的时候
+        // When the song finishes playing
         this.audio.onended = () => {
             this.musics.changeSong('next');
-            // 播放完，换歌后，重新播放
+            // Play it, change the song and replay it
             this.audio.play();
         }
 
     }
 
-    // 播放暂停控制
+    // Playback Pause Control
     handlePlayAndPause() {
         let _o_i = this.$play.$el.find('i');
-        //this.audio.pauseed值为true 说明目前是不播放
-        if (this.audio.paused) { //现在是暂停的 要播放
+        // This.audio.paused has a value of true, which means it is currently not playing.
+        if (this.audio.paused) { // It's paused. Needs to play.
             this.audio.play();
             _o_i.removeClass('icon-play').addClass('icon-pause');
             this.disc.image.addClass('play');
@@ -272,32 +272,32 @@ class PlayerCreator {
         }
     }
 
-    // 更改循环模式
+    // Changing the cycle mode
     changePlayMode() {
         this.loop_mode++;
         if (this.loop_mode > 2) this.loop_mode = 0;
         this.renderPlayMode();
     }
 
-    // 更改按钮样式
+    // Changing the button style
     renderPlayMode() {
         let _classess = ['loop', 'random', 'single'];
         let _o_i = this.$mode.$el.find('i');
-        // prop 改一些标签的自有属性 attr改一些标签的自定义属性
+        // prop change some tag's own attributes attr change some tag's custom attributes
         _o_i.prop('class', 'iconfont icon-' + _classess[this.loop_mode])
     }
 
-    // 歌曲时长
+    // song duration
     songTime() {
         let totalMinute = parseInt(this.audio.duration / 60) < 10 ? "0" + parseInt(this.audio.duration / 60) : parseInt(this.audio.duration / 60);
         let totalSecond = parseInt(this.audio.duration % 60) < 10 ? "0" + parseInt(this.audio.duration % 60) : parseInt(this.audio.duration % 60);
         $('.totalTime').text(totalMinute + ':' + totalSecond);
     }
 
-    // 禁音
+    // silence
     banNotes() {
         let _o_i = this.$ban.$el.find("i");
-        if (this.audio.muted == true) { // 如果禁音则开启
+        if (this.audio.muted == true) { // Enable if sound is disabled
             this.audio.muted = false;
             _o_i.removeClass('icon-muted').addClass('icon-volume');
         } else {
@@ -307,17 +307,17 @@ class PlayerCreator {
     }
 }
 
-// 进度条
+// progress bar
 class Progress {
     constructor(selector, options) {
         $.extend(this, options);
-        // 给this挂载传入的参数
+        // Mounting incoming arguments to this
         this.$el = $(selector);
         this.width = this.$el.width();
         this.init();
     }
 
-    // 进度条初始化
+    // Progress bar initialisation
     init() {
         this.renderBackAndPointer();
         this.bindEvents();
@@ -325,7 +325,7 @@ class Progress {
         this.value;
         this.changeDOMStyle(this.width * this.value);
     }
-    // 为进度条渲染back和pointer
+    // Rendering back and pointer for progress bars
     renderBackAndPointer() {
         this.$back = $('<div class="back">');
         this.$pointer = $('<div class="pointer">');
@@ -334,7 +334,7 @@ class Progress {
         this.$el.append(this.$pointer);
     }
 
-    setValue(value) { // 主动调用，传入value值，设置进度条样式
+    setValue(value) { // Active call, pass in value, set progress bar style
         let _distance = this.width * value / (this.max - this.min);
         this.changeDOMStyle(_distance);
     }
@@ -342,7 +342,7 @@ class Progress {
     drag() {
         let ele = this.$pointer;
         let father = this.$el;
-        let flag = false; // 鼠标是否点击
+        let flag = false; // Whether the mouse clicks
         ele.mousedown((e) => {
             flag = true;
             let mousePos = {
@@ -353,9 +353,9 @@ class Progress {
                     let _left = e.clientX - father.offset().left - mousePos.x;
                     let _distance = Math.max(0, Math.min(_left, father.outerWidth(false) - ele.outerWidth(false)))
                     let _ratio = _distance / father.outerWidth(false);
-                    let _value = _ratio * (this.max - this.min); //当前的音量值
+                    let _value = _ratio * (this.max - this.min); // Current volume value
                     this.changeDOMStyle(_distance);
-                    this.handler(_value); //更改进度之后，执行回调
+                    this.handler(_value); // After changing the progress, execute the callback
                 }
             })
         });
@@ -365,32 +365,32 @@ class Progress {
 
     }
 
-    bindEvents() { // 鼠标点击时更改
+    bindEvents() { // Change on mouse click
         this.$el.click((e) => {
-            let _x = e.offsetX; // 鼠标距离元素左边的距离
+            let _x = e.offsetX; // Mouse distance to the left of the element
             let _ratio = _x / this.width;
-            let _value = _ratio * (this.max - this.min); // 当前的音量值
+            let _value = _ratio * (this.max - this.min); // Current volume value
             this.changeDOMStyle(_x);
-            this.handler(_value); // 更改进度之后，执行回调
+            this.handler(_value); // After changing the progress, execute the callback
         })
     }
-    // 更改pointer和back
+    // Change pointer and back
     changeDOMStyle(distance) {
-        this.$back.width(distance + 7 == 7 ? 0 : distance + 7);//进度为0时将进度条背景改为0否则加上进度按钮的长度
+        this.$back.width(distance + 7 == 7 ? 0 : distance + 7);// When progress is 0 change the progress bar background to 0 otherwise add the length of the progress button
         this.$pointer.css('left', distance + 'px');
     }
 }
 
 
-// 按钮类
+// pushbutton class
 class Btns {
     constructor(selector, handlers) {
-        this.$el = $(selector); //元素
+        this.$el = $(selector); // elemental
         this.bindEvents(handlers);
     }
-    bindEvents(handlers) { //绑定事件
+    bindEvents(handlers) { // bind an event
         for (const event in handlers) {
-            // 使用值的时候保证键值对在对象中是存在的
+            // Ensure that key-value pairs are present in the object when using values
             if (handlers.hasOwnProperty(event)) {
                 this.$el.on(event, handlers[event]);
             }
