@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+		 <style>
+            body {
+               
+                color: #FFFFFF;
+            }
+            
+            /* 其他样式 */
+        </style>
+		
+		
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+		<link rel="stylesheet" href="{% static 'css/font_footer.css' %}">
+    </head>
+
+    <body>
+	
+
+		
+        <div class="header">
+			
+            <input type="checkbox" id="display">
+            <label for="display" class="display-btn" >login&nbsp; </label>
+			
+			
+			<div class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="">
+                <span>PMWarehouse</span>
+            </div>
+			
+			<input type="checkbox" id="display2">
+            <label for="display2" class="display-btn2" >registration&nbsp; </label>
+
+			
+
+            <div class="container">
+              <label for="display" class="close-btn" title="close">&times;</label>
+
+                <h1>Login account</h1>
+                <form action="#">
+                    <label>Email/telephone number</label>
+                    <input type="text">
+
+                    <label>code</label>
+                    <input type="password">
+
+                    <a href="#">Forgot your password?</a>
+                    <button>Login</button>
+
+                    <div class="forgot">Don't have an account?<a href="#">Register for an account</a></div>
+                </form>
+            </div>
+			
+			<div class="container2">
+              <label for="display" class="close-btn2" title="close">&times;</label>
+
+                <h1>Register account</h1>
+                <form action="#">
+                    <label>Email/telephone number</label>
+                    <input type="text">
+
+                    <label>Set Password</label>
+                    <input type="password">
+					
+					<label>Please re-enter your password</label>
+                    <input type="password">
+
+                    <a href="#">Forgot your password?</a>
+                    <button>Register</button>
+
+                    <div class="forgot2">Forgot your password?<a href="#"> Click to retrieve</a></div>
+                </form>
+            </div>
+        </div>
+		   <div class="footer">
+            <div class="ft_left">
+                <img class="_img" src="{% static 'images/main/小さな恋のうた.jpg' %}" alt="">
+                <div class="songNameAndSinger">
+                    <span class="songName">小さな恋のうた<i class="iconfont icon-aixin"></i></span>
+                    <span class="singer">MONGOL800</span>
+                </div>
+            </div>
+
+            <div class="ft_main">
+                <!-- 播放栏工具 -->
+                <ul class="tool_list">
+                    <li><i class="iconfont icon-lajitong"></i></li>
+                    
+                    <li onclick="playPrev()"><i class="iconfont icon-shangyishoushangyige"></i></li>
+                    <li onclick="bofang()"><i class="iconfont icon-bofang _audio"></i><audio id="ado"></audio></li>
+                    <li onclick="playNext()"><i class="iconfont icon-xiayigexiayishou"></i></li>
+                    <li><i class="iconfont icon-geciweidianji"></i></li>
+                </ul>
+                <!-- 进度条 -->
+                <div class="progress">                   
+                    <div class="slide"></div>
+                    <div class="fill"> </div>                  
+                    <!--歌曲当前时间与总时间  -->
+                    <span class="currentTime time">00:00</span>
+                    <span class="duraTime time">00:00</span>
+               </div>
+            </div>
+
+            <ul class="ft_right">
+                <li class="jigao">极高</li>
+                <li class="iconfont icon-yinxiao"></li>
+                <li class="iconfont icon-yinliangkai _voice"></li>
+                <li class="iconfont icon-yiqipindan"></li>
+                <li class="iconfont icon-24gl-playlistMusic"></li>
+            </ul>
+        </div>
+    </body>
+</html>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var displayCheckbox = document.getElementById('display');
+    var display2Checkbox = document.getElementById('display2');
+    var container = document.querySelector('.container');
+    var container2 = document.querySelector('.container2');
+    var displayBtn = document.querySelector('.display-btn');
+    var displayBtn2 = document.querySelector('.display-btn2');
+
+    // 点击登录按钮显示登录表单
+    displayBtn.addEventListener('click', function() {
+        container.style.display = 'block';
+        container2.style.display = 'none'; // 确保注册表单被隐藏
+        displayCheckbox.checked = true; // 可选，如果你使用checkbox来控制
+    });
+
+    // 点击注册按钮显示注册表单
+    displayBtn2.addEventListener('click', function() {
+        container2.style.display = 'block';
+        container.style.display = 'none'; // 确保登录表单被隐藏
+        display2Checkbox.checked = true; // 可选，如果你使用checkbox来控制
+    });
+
+    // 关闭按钮逻辑（假设你也想通过点击关闭按钮隐藏表单）
+    document.querySelector('.close-btn').addEventListener('click', function() {
+        container.style.display = 'none';
+        displayCheckbox.checked = false; // 可选，如果你使用checkbox来控制
+    });
+
+    document.querySelector('.close-btn2').addEventListener('click', function() {
+        container2.style.display = 'none';
+        display2Checkbox.checked = false; // 可选，如果你使用checkbox来控制
+    });
+});
+</script>

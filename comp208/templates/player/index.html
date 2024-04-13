@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>音乐播放器</title>
+    <link rel="stylesheet" href="{% static 'css/iconfont.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/player.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/layui.css' %}">
+</head>
+
+<body>
+<!-- 播放器 -->
+<div class="music-player">
+    <!-- audio标签 -->
+    <audio class="music-player__audio" src="{% static 'media/知足.m4a' %}"></audio>
+    {% csrf_token %}
+    <!-- 播放器主体 -->
+    <div class="music-player__main">
+        <!-- 模糊背景 -->
+       <div class="music-player__blur" style="background-image: url({% static 'images/1.jpg' %});"></div>
+        <!-- 功能列表 -->
+        <div class="music-find_list layui-btn-container">
+            <span id="btn_list" class="layui-icon layui-icon-app demo1"></span>
+        </div>
+        <!-- 功能列表 -->
+        <!-- 唱片 -->
+        <div class="music-player__disc">
+            <!-- 唱片图片 -->
+            <div class="music-player__image">
+                <img src="{% static 'images/c.jpg' %}" alt="" width="100%">
+            </div>
+            <!-- 指针 -->
+            <div class="music-player__pointer"><img src="{% static 'images/cd_tou.png' %}" alt="" width="100%"></div>
+        </div>
+        <!-- 控件主体 -->
+        <div class="music-player__controls">
+            <!-- 歌曲信息 -->
+            <div class="music__info">
+                <h3 class="music__info--title">知足</h3>
+                <p class="music__info--singer">五月天</p>
+            </div>
+            <!-- 控件... -->
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i>
+                        </div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i>
+                        </div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i>
+                        </div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i>
+                        </div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i>
+                        </div>
+                        <div class="control__volume--progress progress">
+                            <div class="back" style="width: 29.5px;"></div>
+                            <div class="pointer" style="left: 22.5px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 歌曲播放进度 -->
+                <div class="player-control__content">
+                    <div class="player__song--progress progress">
+                        <div class="back" style="width: 22.5px;"></div>
+                        <div class="pointer" style="left: 15.5px;"></div>
+                    </div>
+                    <div class="player__song--timeProgess nowTime">00:01</div>
+                    <div class="player__song--timeProgess totalTime">00:28</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- 歌曲列表 -->
+    <div class="music-player__list">
+        <ul class="music__list_content">
+            <li class="music__list__item play">知足 - 五月天</li>
+            <li class="music__list__item">好好 - 五月天</li>
+            <li class="music__list__item">阴天快乐 - 陈奕迅</li>
+        </ul>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/utill.js' %}"></script>
+<script src="{% static 'js/player.js' %}"></script>
+<script src="{% static 'js/layui.js' %}"></script>
+
+<script>
+layui.use(['dropdown', 'util', 'layer', 'table'], function(){
+      var dropdown = layui.dropdown
+      ,util = layui.util
+      ,layer = layui.layer
+      ,$ = layui.jquery;
+
+      //初演示
+      dropdown.render({
+        elem: '.demo1'
+        ,data: [{
+        title: 'load music'
+        ,id: 100
+      }]
+      ,click: function(obj){
+        loadMusic()
+      }
+    });
+
+    // 请求接口 导入歌曲到数据库
+    function loadMusic() {
+        $.ajax({
+                type: 'GET',
+                url: "/load_music",
+                data: {id:1},
+                success: function (data) {
+					layer.alert(data, {icon: 1})
+                }.bind(this),
+                error: function (e) {
+                    console.log("ERROR : ", e);
+               }
+        });
+    }
+  })
+</script>
+</body>
+
+</html>

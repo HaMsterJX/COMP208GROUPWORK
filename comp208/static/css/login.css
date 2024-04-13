@@ -1,0 +1,387 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    background: #323235;
+}
+
+.header {
+
+    width: 100%;
+    height: 100%;
+    background-color:#3D3D40
+}
+
+
+
+.logo {
+    display: flex; /* 使用flex布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    width: 300px; /* 定义固定宽度 */
+    height: 100px; /* 定义固定高度 */
+    margin: auto; /* 自动边距以在容器中居中 */
+	border-radius: 25px;
+}
+
+.logo img {
+    width: 50px; /* 定义图像的固定宽度 */
+    height: 50px; /* 定义图像的固定高度 */
+    margin-right: 10px; /* 在图像和文本之间添加一些空间 */
+}
+
+.logo span {
+    font-size: 20px; /* 定义文本大小 */
+    /* 可以添加更多样式来调整文本的外观 */
+}
+
+
+
+
+
+
+
+.display-btn {
+    top: 18px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    width: 140px;
+    height: 80px;
+    cursor: pointer;
+    background:#1E9281;
+    position: absolute;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.display-btn2 {
+    top: 18px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    width: 140px;
+    height: 80px;
+    cursor: pointer;
+    background: #1E9281;
+    position: absolute;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+
+
+
+
+
+
+
+.display-btn:hover {
+    background: black;
+    color: white;
+}
+
+.display-btn2:hover {
+    background: black;
+    color: white;
+}
+
+input[type='checkbox']{
+    display: none;
+}
+
+#display:checked ~ .container {
+    display: block;
+}
+
+.container {
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: whitesmoke;
+    width: 400px;
+    height: 450px;
+    padding: 30px;
+    position: absolute;
+    border-radius: 15px;
+    opacity: 70%;
+}
+
+.close-btn {
+    right: 10%;
+    position: absolute;
+    color: black;
+    font-size: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    background: none;
+    transition: 0.2s;
+}
+
+
+.container2 {
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: whitesmoke;
+    width: 400px;
+    height: 450px;
+    padding: 30px;
+    position: absolute;
+    border-radius: 15px;
+    opacity: 70%;
+}
+
+.close-btn2 {
+    right: 10%;
+    position: absolute;
+    color: black;
+    font-size: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    background: none;
+    transition: 0.2s;
+}
+
+
+
+
+
+
+
+
+.close-btn:hover {
+    color: red;
+}
+
+h1 {
+    background: none;
+    text-align: center;
+    margin: 20px 0;
+    color: black;
+    text-transform: uppercase;
+}
+
+form {
+    background: none;
+}
+
+label {
+    background: none;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+input {
+    background: none;
+    display: block;
+    width: 90%;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid black;
+    padding: 10px;
+}
+
+button {
+    display: block;
+    margin-top: 20px;
+    width: 95%;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 10px;
+    background: black;
+    border: none;
+    outline: none;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: lightseagreen;
+}
+
+form a {
+    font-weight: bold;
+    color: lightseagreen;
+    background: none;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+form a:hover {
+    color: rgb(13, 84, 81);
+}
+
+.left-align {
+    display: block;
+    text-align: left;
+}
+
+
+
+.forgot2 {
+    background: none;
+    text-align: center;
+    margin: 40px 5px;
+    color: black;
+} 
+
+.forgot {
+    background: none;
+    text-align: center;
+    margin: 40px 5px;
+    color: black;
+	
+	
+
+}
+.footer {
+    border-top: 1px #686868 solid;
+    height: 10vh;
+    background-color: #343437;
+    display: flex;
+    position: fixed; /* 修改这里 */
+    bottom: 0; /* 添加这里 */
+    left: 0; /* 确保footer横跨整个屏幕宽度 */
+    width: 100%; /* 确保footer横跨整个屏幕宽度 */
+	
+}
+
+.footer .ft_left {
+    width: 220px;
+    display: flex;
+    align-items: center;
+}
+
+.ft_left img {
+    width: 55px;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+.ft_left .songNameAndSinger {
+    color: #fff;
+    font-size: 14px;
+    margin-left: 10px;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.songNameAndSinger i{
+    margin-left: 8px;
+}
+
+.songNameAndSinger span.singer{
+    font-size: 10px;
+}
+
+.footer .ft_main {
+    width: 550px;
+    display: flex;
+	
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+	margin: auto;
+}
+
+.tool_list {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 30px;
+}
+
+.tool_list li{
+    cursor: pointer;
+}
+
+.tool_list li i{
+    color: #d4d4d4;
+    font-size: 20px;
+}
+
+.tool_list li:nth-child(3) i{
+    font-size: 30px;
+}
+
+.ft_main .progress {
+    position: relative;
+    width: 60%;
+    height: 2px;
+    background-color: grey;
+    position: relative;
+	bottom: -5px;
+}
+
+.progress .slide {
+    position: absolute;
+    top: -1.6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #ec4141;
+    z-index: 9;
+}
+.progress .fill{
+    position: absolute;
+    top: 0;
+    height: 2px;
+    background-color: #ec4141;
+}
+
+.time{
+    color: #fff;
+    font-size: 10px;
+    position: absolute;
+    cursor: default;
+}
+
+.ft_main .currentTime{
+    top: -8px;
+    left: -37px;
+}
+
+.ft_main .duraTime{
+    top: -8px;
+    right: -40px;
+}
+
+.footer .ft_right{
+    width: 250px;
+    height: 100%;
+    /* background-color: #bfa; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ft_right .jigao{
+    font-size: 14px;
+    color: red;
+    border: red 2px solid;
+    line-height: 100%;
+    padding: 2px;
+    border-radius: 4px;
+    user-select: none;
+}
+
+.ft_right .iconfont{
+    color: #d4d4d4;
+    font-size: 20px;
+}
